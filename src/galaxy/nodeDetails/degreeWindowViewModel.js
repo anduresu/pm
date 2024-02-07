@@ -50,5 +50,5 @@ function followerName(connectionType, count) {
     return 'following'
   }
 
-  return count === 1 ? 'follower' : 'followers';
+  return count === 1 ? 'connection' : 'connections';
 }

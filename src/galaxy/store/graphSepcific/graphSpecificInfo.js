@@ -1,6 +1,7 @@
 export default graphSpecificInfo;
 
 function graphSpecificInfo(graphName) {
+  console.log('Graph name: '+graphName)
   switch(graphName) {
     case 'npm':
     case 'bower':
@@ -54,7 +55,7 @@ function FollowersGraph(graphName) {
   DefaultGraph.call(this, graphName);
 
   this.getInDegreeLabel = function getInDegreeLabel(inDegreeValue) {
-    return inDegreeValue === 1 ? 'follower' : 'followers';
+    return inDegreeValue === 1 ? 'connection' : 'connections';
   };
 
   this.getOutDegreeLabel = function getInDegreeLabel(outDegreeValue) {

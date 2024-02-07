@@ -32,18 +32,20 @@ h1, h2 {
 
 h4 {
   font-family: 'PT Sans', sans-serif;
+  font-size: 30px;
 }
 
 .window-container {
   background-color: rgba(0,0,0, 0.8);
-  color: #7F7F7F;
+  color: #ffffff;
+  font-size: 24px;
   position: absolute;
 }
 
 .window-list-content {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 200px;
+  max-height: 600px;
 }
 
 .node-focus {
@@ -54,14 +56,14 @@ h4 {
   left: 16px;
   top: 47px;
   padding: 10px;
-  width: 395px;
+  width: 600px;
 }
 
 .degree-results-window {
   left: 16px;
-  bottom: 87px;
+  bottom: 120px;
   padding: 10px;
-  width: 395px;
+  width: 600px;
 }
 
 .no-overflow {
@@ -84,6 +86,7 @@ h4 {
   }
   .node-name {
     color: @foreground;
+    font-size: 30px;
   }
 }
 
@@ -121,7 +124,8 @@ h4 {
   color: @foreground;
   padding: 4px 10px;;
   pointer-events: none;
-  min-width: 200px;
+  font-size: 40px;
+  min-width: 150px;
   border: 1px solid @border-color;
 
   span {
@@ -131,6 +135,7 @@ h4 {
 
 .in-degree {
   color: #90EE90;
+  display:20px;
   cursor: pointer;
 }
 
@@ -144,6 +149,7 @@ h4 {
 
 .out-degree {
   color: #F08080;
+  display:none;
   cursor: pointer;
 }
 

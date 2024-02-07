@@ -127,6 +127,7 @@ function loadGraph(name, progress) {
     var deffered = defer();
 
     function processLink(link) {
+      console.log(link);
       if (link < 0) {
         srcIndex = -link - 1;
         lastArray = outLinks[srcIndex] = [];
