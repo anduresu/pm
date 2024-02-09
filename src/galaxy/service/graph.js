@@ -5,14 +5,15 @@ import linkFinder from './edgeFinder.js';
 export default graph;
 
 function graph(rawGraphLoaderData) {
-  var {labels, outLinks, inLinks, positions} = rawGraphLoaderData;
+  var {labels, outLinks, inLinks, positions, linksData} = rawGraphLoaderData;
   var empty = [];
 
   var api = {
     getNodeInfo: getNodeInfo,
     getConnected: getConnected,
     find: find,
-    findLinks: findLinks
+    findLinks: findLinks,
+    getNodeLinksData: getNodeLinksData
   };
 
   return api;
@@ -93,6 +94,29 @@ function graph(rawGraphLoaderData) {
     };
   }
 
+  function getNodeLinksData(startId) {
+    return function getNodeLinksInfo(id) {
+      if (!labels) return;
+
+      var outLinksCount = 0;
+      if (outLinks[id]) {
+        outLinksCount = linksData[labels[startId]][labels[id]];
+      }
+
+      var inLinksCount = 0;
+      if (inLinks[id]) {
+        inLinksCount = linksData[labels[startId]][labels[id]];
+      }
+
+      return {
+        id: id,
+        name: labels[id],
+        out: outLinksCount,
+        in : inLinksCount
+      };
+    }
+  }
+
   function getName(id) {
     if (!labels) return '';
     if (id < 0 || id > labels.length) {
@@ -107,5 +131,10 @@ function graph(rawGraphLoaderData) {
 
   function getLinks() {
     return links;
+  }
+
+  function getNodeLinks(id) {
+    if (!labels) return;
+    return linksData[labels[id]]
   }
 }

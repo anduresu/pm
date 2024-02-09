@@ -25,7 +25,10 @@ export default eventMirror([
    * Fired when links are downloaded
    */
   'linksDownloaded',
-
+  /**
+   * Fired when links data is downloaded
+   */
+  'linksDataDownloaded',
   /**
    * Fired when entire graph is downloaded
    */

@@ -37,6 +37,7 @@ function loadGraph(name, progress) {
   var positions, labels;
   var outLinks = [];
   var inLinks = [];
+  var linksData;
 
   // todo: handle errors
   var manifestEndpoint = config.dataUrl + name;
@@ -47,6 +48,7 @@ function loadGraph(name, progress) {
   return loadManifest()
     .then(loadPositions)
     .then(loadLinks)
+    .then(loadLinksData)
     .then(loadLabels)
     .then(convertToGraph);
 
@@ -55,7 +57,8 @@ function loadGraph(name, progress) {
       positions: positions,
       labels: labels,
       outLinks: outLinks,
-      inLinks: inLinks
+      inLinks: inLinks,
+      linksData: linksData,
     });
   }
 
@@ -127,7 +130,6 @@ function loadGraph(name, progress) {
     var deffered = defer();
 
     function processLink(link) {
-      console.log(link);
       if (link < 0) {
         srcIndex = -link - 1;
         lastArray = outLinks[srcIndex] = [];
@@ -171,6 +173,18 @@ function loadGraph(name, progress) {
   function setLabels(data) {
     labels = data;
     appEvents.labelsDownloaded.fire(labels);
+  }
+
+  function loadLinksData() {
+    return request(galaxyEndpoint + '/links_data.json', {
+      responseType: 'json',
+      progress: reportProgress(name, 'links_data')
+    }).then(setLinksData);
+  }
+
+  function setLinksData(data) {
+    linksData = data;
+    appEvents.linksDataDownloaded.fire(linksData);
   }
 
   function reportProgress(name, file) {

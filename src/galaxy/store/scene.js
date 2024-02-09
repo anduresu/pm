@@ -72,11 +72,29 @@ function sceneStore() {
     return nodeInfo;
   }
 
+  function getNodeLinksData(nodeId) {
+    if (!graph) {
+      unknownNodeInfo.name = nodeId;
+      return unknownNodeInfo;
+    }
+    var nodeInfo = graph.getNodeLinksData(nodeId);
+    // TODO: too tired, need to get this out from here
+    if (currentGraphName === 'github') {
+      nodeInfo.icon = 'https://avatars.githubusercontent.com/' + nodeInfo.name;
+    }
+
+    return nodeInfo;
+  }
+
+  function linksComparison(a, b) {
+    return b.in-a.in
+  }
+
   function getConnected(nodeId, connectionType) {
     if (!graph) {
       return [];
     }
-    return graph.getConnected(nodeId, connectionType).map(getNodeInfo);
+    return graph.getConnected(nodeId, connectionType).map(getNodeLinksData(nodeId)).sort(linksComparison);
   }
 
   function reportProgress(progress) {
